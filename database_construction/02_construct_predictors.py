@@ -25,7 +25,6 @@ if str(PROJECT_DIR) not in sys.path:
     sys.path.insert(0, str(PROJECT_DIR))
 
 from config import COMBINED_EVENTS_FILE, CLEAN_EVENTS_FILE
-#master_df = pd.read_csv(COMBINED_EVENTS_FILE)
 
 ##########################################################################################################
 # === 1. Dictionaries of variables ===
@@ -441,7 +440,6 @@ ongoing_stressors_vars = {
     'CURRENTLY_WORKING': ['PLB072', 'OLB072', 'MLB045', 'LLB045', 'KLB045'],
     'JOB_LOCK_MONEY': ['PLB073A', 'OLB073A', 'MLB046A', 'LLB046A'],
     'JOB_LOCK_INSURANCE': ['PLB073B', 'OLB073B', 'MLB046B', 'LLB046B'], 
-    #'NUM_CHILDREN': ['PB033', 'OB033', 'NB033', 'MB033', 'LB033', 'KB033'],
     'NUM_CHILDREN_ALIVE': ['PB034', 'OB034', 'NB034', 'MB034', 'LB034', 'KB034'],
     'REASON_MOVED': ['PB041M1', 'OB041M1', 'NB041M1', 'MB041M1', 'LB041M1', 'KB041M1'], 
     'RELATIONSHIP_SPOUSE': ['PLB005', 'OLB005', 'NLB006', 'MLB006',	'LLB006', 'KLB006'], 
@@ -594,12 +592,6 @@ unpaid_care_vars = {
                 ######### === 1.5 Derived variables (from event_df) to be aggregated === ##########
 
 scores_to_aggregate_vars = {
-    #'NETWORK_COMPOSITION': [
-    #    'PLB_network_composition', 'OLB_network_composition', 'NLB_network_composition',
-    #    'MLB_network_composition', 'LLB_network_composition', 'KLB_network_composition'
-    #],
-
-
     'CONTACT_CHILDREN': [
         'PLB_contact_children', 'OLB_contact_children', 'NLB_contact_children',
         'MLB_contact_children', 'LLB_contact_children', 'KLB_contact_children'
@@ -1102,8 +1094,6 @@ def aggregate_first_nonmissing(df, var_dict):
     return result, used_vars
 
 
-import pandas as pd
-
 def compute_work_environment(df, work_env_vars):
     """
     Work environment per wave.
@@ -1230,8 +1220,6 @@ def compute_supervisor_support(df, supervisor_support_vars):
 
     return result, used_vars
 
-
-import pandas as pd
 
 def compute_job_scales(df, job_vars):
     """
@@ -1468,8 +1456,6 @@ def convert_weight_height_bmi(df, weight_var='WEIGHT', max_weight_var = 'MAX_WEI
         list: List of raw columns used
     """
     result = pd.DataFrame(index=df.index)
-    #used_vars = [weight_var, feet_var, inch_var]
-
     # Weight in kg
     result['WEIGHT_KG'] = df[weight_var] * 0.453592
     result['WEIGHT_KG'] = result['WEIGHT_KG'].where(df[weight_var].notna(), pd.NA)
@@ -1717,8 +1703,6 @@ def compute_living_at_fulljob_binaries(df, cols):
     out["LIVING_ATFULLJOB_ALONE"]            = flag_eq(10)
     out["LIVING_ATFULLJOB_CHILDREN_UNSPEC"]  = flag_eq(11)
     out["LIVING_ATFULLJOB_MILITARY"]         = flag_eq(12)
-    #out["LIVING_ATFULLJOB_OTHER"]            = flag_eq(97)
-
     # Return (new_vars_df, used_cols) to match your pipeline contract
     return out, cols
 
@@ -1764,9 +1748,6 @@ def compute_living_at40_binaries(df, cols):
     out["LIVING_AT40_NONREL"]           = flag_eq(9)
     out["LIVING_AT40_ALONE"]            = flag_eq(10)
     out["LIVING_AT40_CHILDREN_UNSPEC"]  = flag_eq(11)
-    #out["LIVING_AT40_MILITARY"]         = flag_eq(12) #all of them were 0
-    #out["LIVING_AT40_OTHER"]            = flag_eq(97)
-
     # Return (new_vars_df, used_cols) to match your pipeline contract
     return out, cols
 
@@ -2006,9 +1987,6 @@ def compute_caregiving_variables(df, unpaid_care_vars):
 
     """
     rel_vars = unpaid_care_vars['relationship_vars']
-    #start_vars = unpaid_care_vars['start_vars']
-    #end_vars = unpaid_care_vars['end_vars']
-
     result = pd.DataFrame(index=df.index)
 
         # Count number of caregiving episodes based on relationship variables
@@ -2048,39 +2026,6 @@ def aggregate_first_valid(df, var_dict, invalid_values=None):
         result[new_var] = data.bfill(axis=1).iloc[:, 0]
 
     return result, used_vars
-
-"""
-def aggregate_first_valid(df, var_dict, invalid_values=None):
-    
-    Aggregates multiple variables by selecting the first non-missing value across waves (P → K),
-    treating specified values (e.g., 8, 9) as missing.
-
-    Args:
-        df (pd.DataFrame): Your main dataset.
-        var_dict (dict): Dictionary of {new_var_name: [list of raw vars in priority order]}.
-        invalid_values (list, optional): Values to treat as missing before aggregation.
-
-    Returns:
-        pd.DataFrame: DataFrame with new variables.
-        list: List of used raw variable names.
-    
-    result = pd.DataFrame(index=df.index)
-    used_vars = []
-
-    for new_var, var_list in var_dict.items():
-        data = df[var_list].copy()
-
-        # Replace invalid values with pd.NA
-        if invalid_values is not None:
-            data = data.mask(data.isin(invalid_values))
-
-        result[new_var] = data.bfill(axis=1).iloc[:, 0]
-        used_vars.extend(var_list)
-
-    return result, used_vars
-"""
-
-import pandas as pd
 
 def compute_salary_year(df, amount_col='LH47A', unit_col='LH47B'):
     """
@@ -2585,8 +2530,6 @@ def main():
 
     relationship_history_scores, relationship_history_raws = compute_relationship_history(master_df, relationship_vars) 
 
-    #relationship_rand_scores, relationship_rand_raws = compute_rand_relationship_history(master_df, rand_relationship_vars)
-
     job_history_scores, job_history_raws = compute_job_history(master_df)
 
     exit_job_reason_scores = summarize_primary_exit_reason(master_df, main_reason_col='LH49AM1')
@@ -2601,8 +2544,6 @@ def main():
     income_scores, income_raws = compute_household_income(master_df, hh_income_vars, income_threshold=20000)
 
     unemployment_scores, unemployment_raws = compute_unemployment(master_df, unem_vars)
-
-    #ever_str_scores, ever_str_raws = aggregate_ever_vars_str(master_df, ever_vars_str)
 
     ever_bin_scores, ever_bin_raws = aggregate_ever_vars_bin(master_df, ever_vars_bin)
 
@@ -2654,13 +2595,11 @@ def main():
         salary_year_scores, 
         unemployment_scores, 
         income_scores, 
-        #ever_str_scores, 
         ever_bin_scores,
         job_sat_30_scores,  
         pgs_scores, 
         rand_scores, 
         siblings_scores, 
-        #relationship_rand_scores
         ], axis=1)
 
     #Combine all raw variables to drop
@@ -2699,13 +2638,11 @@ def main():
                         unemployment_raws +
                         income_raws +
                         salary_year_raws +
-                        #ever_str_raws + 
                         ever_bin_raws +
                         job_sat_30_raws +
                         pgs_raws +
                         rand_raws + 
                         siblings_raws +
-                        #relationship_rand_raws +
                         list(to_delete_raw))
 
 
@@ -2733,8 +2670,6 @@ def main():
 
     events_df['REASON_MOVED_CATEGORY'] = events_df['REASON_MOVED'].apply(map_move_reason)
     events_df[['FAMFIN', 'FAUNEM','MOWORK', 'RTHLTHCH', 'USBORN', 'PACKS_NOW', 'ALC_CUTDOWN', 'ALC_CRITICIZED', 'ALC_GUILT', 'ALC_HANGOVER_DRINK']] = events_df[['FAMFIN', 'FAUNEM', 'MOWORK', 'RTHLTHCH', 'USBORN', 'PACKS_NOW', 'ALC_CUTDOWN', 'ALC_CRITICIZED', 'ALC_GUILT', 'ALC_HANGOVER_DRINK']].replace([8, 9], pd.NA)
-    #events_df[['LH50A', 'LH50B', 'LH50C', 'LH50D', 'LH50E', 'LH50F', 'LH50G', 'LH50H', 'LH51']] = events_df[['LH50A', 'LH50B', 'LH50C', 'LH50D', 'LH50E', 'LH50F', 'LH50G', 'LH50H', 'LH51']].replace(5, pd.NA)
-
     events_df[['FAEDUC', 'MOEDUC', 'NUM_CHILDREN_ALIVE', 'SCHLYRS', 'AGE_STARTED_SMOKING_YRS', 'MAX_PACKS_PER_DAY', 'YEARS_SINCE_STOP_SMOKING', 'AGE_STOPPED_SMOKING', 'DRINKS_PER_DAY', 'LH3A', 'LH9', 'LH13', 'LH16', 'LH19', 'LH33A', 'LH38', 'LH43', 'LH48', 'LH49', 'LH51', 'LH15']] = events_df[['FAEDUC', 'MOEDUC', 'NUM_CHILDREN_ALIVE', 'SCHLYRS', 'AGE_STARTED_SMOKING_YRS', 'MAX_PACKS_PER_DAY', 'YEARS_SINCE_STOP_SMOKING', 'AGE_STOPPED_SMOKING', 'DRINKS_PER_DAY', 'LH3A', 'LH9', 'LH13', 'LH16', 'LH19', 'LH33A', 'LH38', 'LH43', 'LH48', 'LH49', 'LH51', 'LH15']].replace([96, 97, 98, 99], pd.NA)
 
     events_df[['LH39A', 'LH39B', 'LH39C', 'LH39D', 'LH40A', 'LH40B', 'LH40C', 'LH40D']] = events_df[['LH39A', 'LH39B', 'LH39C', 'LH39D', 'LH40A', 'LH40B', 'LH40C', 'LH40D']].replace([97], pd.NA)
@@ -2845,8 +2780,6 @@ def main():
 
 
 
-    #events_df = convert_to_numeric(events_df, ['MARITAL_STATUS_RAND','EVER_DRANK_RAND', 'CURRENTLY_SMOKING_RAND', 'NEVER_MARRIED'])
-    
         # Adapt marital status variable
     events_df['MARITAL_STATUS_RAND'] = events_df['MARITAL_STATUS_RAND'].replace({1: 1, 2: 1, 3: 2, 4: 3, 5: 3, 6: 3, 7: 4, 8: 5})
 
@@ -2900,13 +2833,6 @@ def main():
 
 
 
-    #events_df = categorize_by_median(events_df, ['SPOUSE_NEG_SUPPORT', 'SPOUSE_POS_SUPPORT', 'JOB_SATISFIED', 'SUPERVISOR_SUPPORT', 'COWORKER_SUPPORT', 'JOB_STRESS', 'WORK_ENV'])
-
-    #events_df = does_not_apply(events_df, 'MARITAL_STATUS_RAND', [3, 4, 5], ['RELATIONSHIP_SPOUSE', 'SPOUSE_NEG_SUPPORT_CAT', 'SPOUSE_POS_SUPPORT_CAT'], 0 )
-
-
-
-    #events_df = does_not_apply(events_df, 'CURRENTLY_WORKING', [0], ['JOB_SATISFIED_CAT', 'SUPERVISOR_SUPPORT_CAT', 'COWORKER_SUPPORT_CAT', 'JOB_STRESS_CAT', 'WORK_ENV_CAT'], 0 )
     events_df = does_not_apply(events_df, 'RAEDUC', [1, 2, 3], ['NUM_UNI'], 0)
     events_df = does_not_apply(events_df, 'RAEDUC', [1, 2, 3], ['PRIVATE_UNI'], 5)
     #drinks per week is 0 if they do not drink
@@ -2996,12 +2922,6 @@ def main():
 
 
     events_df = clean_lh1_data(events_df)
-    #events_df = does_not_apply(events_df, 'LH38', 1, ['NOTWORK_REASON_FAMILY', 'NOTWORK_REASON_HEALTH', 'NOTWORK_REASON_UNEMPLOYED', 'NOTWORK_REASON_NOT_INTERESTED'], 5)
-
-    #events_df[['LH39A', 'LH39B', 'LH39C', 'LH39D']] = events_df[['LH39A', 'LH39B', 'LH39C', 'LH39D']].replace(99, 0) #does not apply because they were never married or never had children. This is already in other variables and will account for it in the analyses
-
-    # Replace 99 with 0 before dropping columns
-    #events_df[['LH40A', 'LH40B', 'LH40C', 'LH40D']] = events_df[['LH40A', 'LH40B', 'LH40C', 'LH40D']].replace(99, 0)
 
 
 
@@ -3018,8 +2938,6 @@ def main():
     events_df = events_df.drop(columns=to_delete_dv.union(scores_to_aggregate_raws)).copy()
 
 
-
-    #events_df = events_df.apply(pd.to_numeric, errors='coerce')
 
 
 

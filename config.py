@@ -144,6 +144,10 @@ EPIGENETIC_AGE_FILE = (
     OUTPUT_DIR / "epigenetic_age.csv"
 )
 
+EPIGENETIC_AGE_EVENTS_PRE_FILE = (
+    OUTPUT_DIR / "epigenetic_age_events_pre.csv"
+)
+
 EPIGENETIC_AGE_EVENTS_FILE = (
     OUTPUT_DIR / "epigenetic_age_events.csv"
 )

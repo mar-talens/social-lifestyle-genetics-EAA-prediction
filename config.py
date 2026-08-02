@@ -40,6 +40,10 @@ OUTPUT_DIR = PROJECT_DIR / "output"
 # Create the output folder automatically if it does not already exist
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# Folder for machine-learning and other analysis outputs
+ANALYSIS_OUTPUT_DIR = OUTPUT_DIR / "analyses"
+ANALYSIS_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
 
 # =============================================================================
 # 3. HRS INPUT DATASETS USED TO BUILD THE PREDICTOR DATABASE

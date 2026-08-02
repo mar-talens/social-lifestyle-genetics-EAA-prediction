@@ -1,0 +1,37 @@
+# Restricted HRS source data
+*.dta
+
+# Generated participant-level datasets and model outputs
+combined_events.csv
+events_df.csv
+epigenetic_age.csv
+epigenetic_age_events_pre.csv
+epigenetic_age_events.csv
+analysis_dataset.csv
+oof_predictions.csv
+shap_long*.csv
+shap_wide*.csv
+
+# Restricted and temporary data/output directories
+raw/
+intermediate/
+private/
+tmp/
+temp/
+temporary/
+
+# Operating-system, notebook, and Python cache files
+.DS_Store
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Microsoft Office temporary lock files
+~$*
+
+# Python virtual environments
+.venv/
+venv/
+env/
+.env/
+ENV/

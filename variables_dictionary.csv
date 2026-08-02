@@ -1,0 +1,272 @@
+raw_var,description
+ALCOHOL_DRUG_FAM,Ongoing drug/alcohol problems in family
+AFRICAN_AMERICAN_BINARY,African American
+ANCESTRY_FLAG,PGI Ancestry Flag
+ATTACK,Ever been attacked/assaulted
+ATTENMO,Time and attention form mother during childhood
+BINGE_LIFECOURSE,Ever binged on alcohol
+BIRTHMO,Birth month
+BIRTHYR,Birth year
+BIRTH_PLACE_1.0,Born in New England
+BMI,Body Mass Index
+CHILDREN_NEG_SUPPORT,Negative support from children
+CHILDREN_POS_SUPPORT,Positive support from children
+CHLDIED,Ever lost a child
+CHMISSCH,Missed more than a month of schoool because of health
+CHRONIC_UNEMPLOYMENT,Unemployed for two waves in a row
+CHRON_AGE,Chronological Age
+CHSMOKE,Smoked before age 16
+CIGS_NOW,Number of cigarettes smoked now
+CLOSE_CHILDREN,Number of close children
+CLOSE_FAMILY,Number of close family
+CLOSE_FRIENDS,Number of close friends
+COMBAT,Ever fired or been fired at in combat
+CONTACT_CHILDREN,Contact frequency with children
+CONTACT_FAMILY,Contact frequency with family
+CONTACT_FRIENDS,Contact frequency with friends
+COWORKER_SUPPORT_CAT,Coworker Support
+CURRENTLY_DRINKS,Currently Drinks Alcohol
+CURRENTLY_PENSION,Currently Receiving Pension
+CURRENTLY_SMOKING_RAND,Currently Smoking
+CURRENTLY_WORKING,Currently Working
+CURRENT_MARITAL_STATUS,Current Marital Status
+CURRENT_MARRIAGE_YRS_RAND,Years in Current Marriage
+DAD_AGE_RAND,Father's Current Age / Age at Death
+DEGREE,Highest Degree of Education
+DENCARE,Ever Been Denied Care
+DENLOAN,Ever Been Denied Loan
+DENPROM,Ever Been Denied Promotion
+DISASTER,Ever experienced a natural disaster
+DISCRIMINATION,Perceived Discrimination
+DISMJOB,Been undarily dismissed from a job
+DNAMGRIMAGE,GRIMAGE
+DRINKS_PER_WEEK_RAND,Days per week drinking alcohol
+DRKDRUG,Parents with drug/alcohol problems
+DRUG,Problems with drugs/alcohol before age 16
+DRUGOTH,Spouse or children ever had a drug/alcohol addiction
+EAA_DUNEDINMPOA,EAA DUNEDINMPOA
+EAA_DUNEDINMPOA_BINARY,EAA DUNEDINMPOA BINARY
+EAA_DUNEDINMPOA_TERTILE,EAA DUNEDINMPOA TERTILE
+EAA_GRIMAGE,EAA GRIMAGE
+EAA_GRIMAGE_BINARY,EAA GRIMAGE BINARY
+EAA_GRIMAGE_TERTILE,EAA GRIMAGE TERTILE
+EAA_HANNUM,EAA GANNUM
+EAA_HORVATH,EAA HORVATH
+EAA_LEVINE,EAA LEVINE
+EFFMO,Effort from mother during childhood
+EVER_DIVORCED,Ever Divorced
+EVER_DRANK_RAND,Ever Drank Alcohol
+EVER_LIVED_AS_A_COUPLE,Ever Lived as a Couple
+EVER_MARRIED,Have You Ever Been
+EVER_SMOKED_RAND,Ever Smoked
+EVER_RACE_DISCRIMINATION,Ever Experienced Discrimination due to Race
+EVER_WIDOWED,Ever Widowed
+FAEDUC,Highest Degree of Education of Father
+FAMFIN,Family financial situation before age 16
+FAMILY_NEG_SUPPORT,Negative support from family
+FAMILY_POS_SUPPORT,Positive support from family
+FAUNEM,Father unemployed before age 16
+FINANCIAL_CONTROL_CHANGE,Change in financial control
+FINANCIAL_STRAIN_ELDERLY,Difficulty to meet monthly expenses
+FINANCIAL_STRAIN_YRSLF,Ongoing Financial Strain
+FJOB,Fathers Job before age 16
+FMFINH,Received help from relatives for financial problems before age 16
+FORMER_SMOKER,Former Smoker
+FRAUD_5Y_AGG,Victim of fraud in the last 5 years
+FRIENDS_NEG_SUPPORT,Negative support from friends
+FRIENDS_POS_SUPPORT,Positive support from friends
+GENDER,Gender (Male = 1)
+HANNUM_DNAMAGE,Hannum
+HEALTH_PROB_YRSLF,Ongoing Health Problems
+HEIGHT_CM,Height
+HHID,HHID
+HH_INCOME_DROPS,Household Income Drop by 50%
+HH_MEAN_INCOME,Household Mean Income
+HH_PERSISTENT_LOW_INCOME,Household Persistent Low Income
+HH_POVERTY_THRESHOLD,Household below Poverty Threshold
+HH_UNEMPLOYED_5Y_AGG,Anyone in Household Unemployed in the Last 5 Years
+HISPANIC,Hispanicity type
+HISPANIC_BINARY,Hispanic
+HOMELESS_AGG,Ever been homeless
+HORVATH_DNAMAGE,Horvath
+HOUSING_PROB_YOURSELF,Ongoing Housing Problems
+ILLOTH,Spouse or children ever had a life-threatening illness or injury
+ILLSELF,Ever had a life-threatening illness or injury
+IMMGYEAR,Year Immigrated to the US
+JAIL_AGG,Ever Been in Jail
+JOB_SATISFIED_CAT,Job Satisfaction
+JOB_STRESS_CAT,Job Stress
+LEVINE_DNAMAGE,Levine
+LH1,Ever lived outside the US
+LH11,Number of books in childhood home
+LH12,Languages spoken in childhood home
+LH13,Age when started first full-time job
+LH15,Number of people lived with when started first full-time job
+LH16,Type of residence when started first full-time job
+LH19,Number of people lived with when age 40
+LH1B1,Ever lived outside the US before age 10
+LH1B2,Ever lived outside the US between age 10-17
+LH1B3,Ever lived outside the US between age 18-25
+LH1B4,Ever lived outside the US between age 26-50
+LH20,Type of residence when age 40
+LH23,Attended pre-school/nursery school
+LH2A,Lived in a orphanage before age 16
+LH2B,Lived with a foster family before age 16
+LH2C,Lived in a boarding school before age 16
+LH2D,Parents separated before age 16
+LH2E,Parent died before age 16
+LH2G,Separated from mother for more than 6 months before age 16
+LH2H,Separated from father for more than 6 months before age 16
+LH2I,Grandparents primary caregivers before age 16
+LH30,Studied a foreign language in high school
+LH33,"Participated in sports during junior, middle and high school"
+LH34,"Attended a college, professional or technical school"
+LH38,Worked for a year or more after highschool
+LH39A,Ever stopped working to take care of children
+LH39B,Ever cut back working hours to take care of children
+LH39C,Ever worked longer hours to take care of children
+LH39D,Ever switched to a less demanding job to take care of children
+LH3A,Age when stopped living with parents
+LH40A,Spouse or partner ever stopped working to take care of children
+LH40B,Spouse or partner ever cut back working hours to take care of children
+LH40C,Spouse or partner ever worked longer hours to take care of children
+LH40D,Spouse or partner ever switched to a less demanding job to take care of children
+LH4A,Been in jail before age 50
+LH4B,Been in a hospital for 1 month or more before age 50
+LH4C,Lived in a combat zone before age 50
+LH4D,Lived on a military base before age 50
+LH4E,Were homeless for 1 month or more before age 50
+LH51,Ever provided unpaid care to a family member or friend
+LH58A,Freq. of vigorous physical activity age 18-29
+LH58B,Freq. of vigorous physical activity age 30-39
+LH58C,Freq. of vigorous physical activity age 40-49
+LH59A,Freq. of moderate physical activity age 18-29
+LH59B,Freq. of moderate physical activity age 30-39
+LH59C,Freq. of moderate physical activity age 40-49
+LH7,Number of people lived with when age 10
+LH8,Number of bedrooms in home when age 10
+LH9,Type of residence when age 10
+LIVEGPAR,Lived with grandparents for more than a year before age 17
+LIVING_AT10,People lived with when age 10
+LIVING_AT20,People lived with when age 20
+LIVING_AT40,People lived with when age 40
+LONELINESS,Perceived Loneliness
+LONGEST_JOB_DURATION,Years working in longest job
+LONGEST_JOB_INDUSTRY,Longest Job Industry
+LONGEST_JOB_OCCUPATION,Longest Job Occupation
+LOST_JOB_5Y_AGG,Lost a job in the last 5 years
+LONGEST_MARRIAGE_YRS_RAND,Length of the longest marriage (years)
+MARITAL_STATUS_RAND,Marital Status
+MARITAL_STATUS_MARRIED,Currently Married
+MOEDUC,Highest Degree of Education of Mother
+MOTHER_AGE_RAND,Mother's Current Age / Age at Death
+MOVED_5Y_AGG,Moved to a worse neighborhood in the last 5 years
+MOVFIN,Moved for financial reasons before age 16
+MOWORK,Portion of time mother worked before age 16
+MPOA,DunedinMPOA
+NEIGHBORHOOD_COHESION,Perceived Neighborhood Cohesion
+NEIGHBORHOOD_DISORDER,Perceived Neighborhood Disorder
+NETWORK_COMPOSITION,Composition Of Social Network
+NEVER_MARRIED,Never got Married
+NUM_CIGS_PER_DAY,Number of Cigarettes Smoked per Day
+NUM_SCHOOLS,Number of Schools Attended
+NUM_UNEMPLOYMENT,Number of waves unemployed
+NUM_UNI,Number of Universities attended
+NUMBER_DIVORCES,Number of Divorces
+NUMBER_DRINKS,Number of Drinks per Week
+NUMBER_LIVING_SIBLINGS,Number of Living Siblings
+NUMBER_MARRIAGES,Number of Marriages
+NUMBER_WIDOWED,Number of Widowed
+SPOKE_ENGLISH_HOME,Spoke English at Home before age 16
+PARSMOKE,Parents smoked during their childhood
+PC1_5A,Principal Component 1
+PC1_5B,Principal Component 2
+PC1_5C,Principal Component 3
+PC1_5D,Principal Component 4
+PC1_5E,Principal Component 5
+PC6_10A,Principal Component 6
+PC6_10B,Principal Component 7
+PC6_10C,Principal Component 8
+PC6_10D,Principal Component 9
+PC6_10E,Principal Component 10
+PGI_AB_BROAD17,PGI Antisocial Behavior
+PGI_ADHD_PGC17,PGI Attention Deficit Hyperactivity Disorder (PGC17)
+PGI_AFBC_SOCGEN16,PGI Age at first birth (SOCGEN16)
+PGI_AI_GSCAN19,PGI Age Smoke Initiation (GSCAN19)
+PGI_ALC_PGC18,PGI Alcohol Dependence (PGC18)
+PGI_ANXFS_ANGST16,PGI Anxiety (ANGST16)
+PGI_AUTISM_PGC17,PGI Autism (PGC17)
+PGI_BIP_PGC11,PGI Bipolar Disorder (PGC11)
+PGI_BMI2_GIANT18,PGI Body Mass Index 2 (GIANT18)
+PGI_BUNTE_CKDGEN19,PGI Blood Urine Nitrogen trans-ethnic (CKDGEN19)
+PGI_BUN_CKDGEN19,PGI Blood Urine Nitrogen (CKDGEN19)
+PGI_CAD_CARDIOGRAM11,PGI Coronary Artery Disease (CARDIOGRAM11)
+PGI_CANNABIS_ICC18,PGI Lifetime Cannabis Use (ICC18)
+PGI_CKDTE_CKDGEN19,PGI Chronic Kidney Disease trans-ethnic (CKDGEN19)
+PGI_CKD_CKDGEN19,PGI Chronic Kidney Disease (CKDGEN19)
+PGI_CORTISOL_CORNET14,PGI Cortisol levels (CORNET14)
+PGI_CRP_CHARGE22,PGI C-Reactive Protein (CHARGE22)
+PGI_DEPSYMP_SSGAC16,PGI Depressive Symptoms (SSGAC16)
+PGI_DPW_GSCAN19,PGI Drinks per Week (GSCAN19)
+PGI_EDU3_W23_SSGAC18,PGI Educational Attainment 3 (W23 SSGAC18)
+PGI_EGFRTE_CKDGEN19,PGI estimated glomerular filtration trans-ethnic (CKDGEN19)
+PGI_EGFR_CKDGEN19,PGI estimated glomerular filtration (CKDGEN19)
+PGI_EXTRAVERSION_GPC16,PGI Extraversion (GPC16)
+PGI_GENCOG2_CHARGE18,PGI General Cognition 2 (CHARGE18)
+PGI_GWALZNA_PGC21,PGI Alzheimer's disease (PGC21)
+PGI_HBA1CEA_MAGIC17,PGI Glycated hemoglobin A1c (MAGIC17)
+PGI_HDL_GLGC13,PGI High-Density Lipoprotein (GLGC13)
+PGI_HTN_COGNET17,PGI Blood Pressure (COGNET17)
+PGI_LDL_GLGC13,PGI Low-Density Lipoprotein (GLGC13)
+PGI_MENARCHE_REPROGEN17,PGI Age at Menarche (REPROGEN17)
+PGI_MENOPAUSEREPROGEN21,PGI Age at Menopause (REPROGEN21)
+PGI_MI_CARDIOGRAM15,PGI Myocardial Infarction (CARDIOGRAM15)
+PGI_NEBC_SOCGEN16,PGI Number of Children Ever Born (SOCGEN16)
+PGI_NEUROTICISM_SSGAC16,PGI Neuroticism (SSGAC16)
+PGI_OCD_IOCDF17,PGI Obsessive-Compulsive Disorder (IOCDF17)
+PGI_PTSDC_PGC18,PGI Post-Traumatic Stress Disorder (PGC18)
+PGI_SC_GSCAN19,PGI Smoking Cessation (GSCAN19)
+PGI_SCZ_PGC14,PGI Schizophrenia (PGC14)
+PGI_SI_GSCAN19,PGI Smoking initiation (GSCAN19)
+PGI_TC_GLGC13,PGI Total Cholesterol (GLGC13)
+PGI_TG_GLGC13,PGI Triglycerides (GLGC13)
+PGI_T2DALL_DIAGRAM24,PGI Type 2 Diabetes (DIAGRAM24)
+PGI_WC_GIANT15,PGI Waist Circumference (GIANT15)
+PGI_WELLBEING_SSGAC16,PGI Wellbeing (SSGAC16)
+PGI_WHR_GIANT15,PGI Waist-to-Hip Ratio (GIANT15)
+PGI_XDISORDER_PGC13,PGI Mental Health Cross-Disorder (PGC13)
+PHYABUSE,Been physically abused by parents before age 18
+PHYS_ACTIVITY_MILD,Current frequency of mild physical activity
+PHYS_ACTIVITY_MODERATE,Current frequency of moderate physical activity
+PHYS_ACTIVITY_VIGOROUS,Current frequency of vigorous physical activity
+PHY_EMOT_PROB_FAM,Ongoing emotional/physical problems in family
+PN,PN
+PREVMOV,Ever been unfairly denied to buy or rent a house
+PRIVATE_SCHOOL,Attended Private School
+PRIVATE_UNI,Attended Private University
+RACE,Race
+RAEDUC,Highest Degree of Education
+RAEVBRN,Number of Children Ever Born
+RAEVBRN_CAT,Number of Children Ever Born Categorical
+RELATIONSHIP_PROB,Ongoing problems in a close relationships
+RELATIONSHIP_SPOUSE,Closeness to spouse
+RELATIVES_NEIGHBORHOOD,Relatives living in the neighborhood
+RELWFA,Had a good relationship with father before age 18
+RELWMO,Had a good relationship with mother before age 18
+ROBBED_5Y_AGG,Been robbed in the last 5 years
+RTHLTHCH,Rate childhood health
+SCHLOVER,Repeated a school year
+SCHLYRS,Number of years in school
+SICK_FAM,Currently helping a sick family member or friend
+SPOUSE_NEG_SUPPORT_CAT,Spouse Negative Support
+SPOUSE_POS_SUPPORT_CAT,Spouse Positive Support
+SUPERVISOR_SUPPORT_CAT,Supervisor Support
+TEACHMO,How much their mother taught them about life
+TRPOLICE,Were in trouble with the police before age 18
+UNEMPLOYED_5Y_AGG,Unemployed in the last 5 years
+UNFPOLICE,Ever been unfairly treated by the police
+USBORN,Born In The US
+WEIGHT_KG,Weight
+WHITE_BINARY,Non-Hispanic White
+WORK_DIFF_YRSLF,Ongoing Work Difficulties
+WORK_ENV_CAT,Working Environment

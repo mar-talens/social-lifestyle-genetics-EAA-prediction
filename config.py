@@ -23,19 +23,19 @@ HRS_DATA_DIR = Path("/path/to/your/HRS_data")
 # 2. REPOSITORY PATHS
 # =============================================================================
 
-# Folder containing this config.py file
-DATABASE_CONSTRUCTION_DIR = Path(__file__).resolve().parent
-
 # Root folder of the GitHub repository
-PROJECT_DIR = DATABASE_CONSTRUCTION_DIR.parent
+PROJECT_DIR = Path(__file__).resolve().parent
+
+# Folder containing the database-construction scripts
+DATABASE_CONSTRUCTION_DIR = PROJECT_DIR / "database_construction"
 
 # Excel file containing the variable descriptions and extraction information
 VARIABLE_DESCRIPTION_FILE = (
-    DATABASE_CONSTRUCTION_DIR / "data_description.xlsx"
+    PROJECT_DIR / "data_description.xlsx"
 )
 
 # Folder where intermediate and final datasets will be saved
-OUTPUT_DIR = DATABASE_CONSTRUCTION_DIR / "output"
+OUTPUT_DIR = PROJECT_DIR / "output"
 
 # Create the output folder automatically if it does not already exist
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

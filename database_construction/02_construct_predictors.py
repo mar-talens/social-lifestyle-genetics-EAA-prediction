@@ -2355,8 +2355,6 @@ def compute_lh50_score(df):
 
     return result, required_cols
 
-    return result, used_vars
-
 def combine_ethnicities(df, pgs_vars, prefix='PGI_', standardize=False):
     """
     Combina las columnas A5_, E5_ y H5_ en una sola por trait, sin modificar el DataFrame original.

@@ -48,7 +48,7 @@ def main():
     os.makedirs(outdir, exist_ok=True)
 
     # Predictor domains, targets, and configuration
-    PARALLEL_CORES = max(1, min(4, os.cpu_count() or 2))  # 2–4 en portátil
+    PARALLEL_CORES = max(1, min(4, os.cpu_count() or 2))  # 2–4 on a laptop
     N_SPLITS = 5
     SEED = 42
 
@@ -125,7 +125,7 @@ def main():
     SHAP_TARGETS = {"EAA_GRIMAGE", "EAA_DUNEDINMPOA", "EAA_HORVATH", "EAA_HANNUM", "EAA_LEVINE"}
 
     # Hyperparameter grids
-    # ——— DEFAULT (todos los relojes salvo DunedinPoAm) ———
+    # ——— DEFAULT (all clocks except DunedinPoAm) ———
     rf_param_grid_strict = {
         "n_estimators": [300, 600, 900],
         "max_depth": [3, 4, 5],
@@ -158,7 +158,7 @@ def main():
     def is_dunedin(target: str) -> bool:
         return base_clock_name(target) in DUNEDIN_BASES
 
-    # ——— DUNEDIN (menos regularización) ———
+    # ——— DUNEDIN (less regularization) ———
     rf_param_grid_poam = {
         "n_estimators": [600, 900, 1200],
         "max_depth": [6, 8, None],
@@ -552,7 +552,7 @@ def main():
     id_df = df.loc[:, ["HHID", "PN"]].reset_index(drop=True)
 
     # Main RF/XGBoost CV, feature importance, SHAP, permutation, and ablation
-    # ========= CORE CV (con OOF + todo) =========
+    # ========= CORE CV (with OOF + all analyses) =========
     def foldwise_allvars_perm_ablate_domain(
         model_class, param_grid, X, y, grouped_variables, all_predictors, is_classification,
         splits, perm_repeats=50, k_neighbors=40, seed=42, do_full=True, compute_shap=False,
@@ -579,8 +579,7 @@ def main():
                 le = LabelEncoder()
                 ytr = le.fit_transform(ytr_raw)
                 yva = le.transform(yva_raw)
-                # ===== CLASSIFIER-ONLY: Series alineadas para OOF y observed_only_delta =====
-                ytr_ser = pd.Series(ytr, index=Xtr.index)
+                # ===== CLASSIFIER-ONLY: Aligned series for OOF and observed_only_delta =====
                 yva_ser = pd.Series(yva, index=Xva.index)
             else:
                 ytr, yva = ytr_raw, yva_raw
@@ -702,7 +701,7 @@ def main():
                             "fold": fold_id, "removed_group": grp_name, "variable": feat, "importance": imp
                         })
 
-                # --- OBSERVED-ONLY Δ + coverage (Series SOLO en classifier) ---
+                # --- OBSERVED-ONLY Δ + coverage (series only in classifier) ---
                 delta_obs, coverage_val = observed_only_delta(
                     base_model, abl_model, Xva,
                     (yva_ser if is_classification else yva_raw),
@@ -819,7 +818,7 @@ def main():
             abl_rows = []
             dom_rows = []
 
-            # para SHAP en este estrato
+            # for SHAP in this stratum
             shap_abs_folds = []
             shap_chunks_stratum = []
 
@@ -854,7 +853,7 @@ def main():
                     is_classification, n_jobs=PARALLEL_CORES
                 )
 
-                # métricas train + val (ALL-VARS)
+                # train + validation metrics (ALL-VARS)
                 met_tr = _train_metrics(
                     model, Xtr,
                     (ytr if is_classification else ytr_raw),
@@ -880,7 +879,7 @@ def main():
                 if hasattr(model, "feature_importances_"):
                     fi_fold_list.append(model.feature_importances_.copy())
 
-                # ---------- SHAP en estrato ----------
+                # ---------- SHAP within stratum ----------
                 if compute_shap:
                     print(f"[SHAP|STRAT] {stratum_name} fold {fold_id} ...")
                     bg = Xtr if len(Xtr) <= 5000 else Xtr.sample(5000, random_state=0)
@@ -893,7 +892,7 @@ def main():
                     shap_wide_fold.insert(2, "stratum", stratum_name)
                     shap_chunks_stratum.append(shap_wide_fold)
 
-                # ---------- PERMUTACIÓN KNN POR DOMINIO (en estrato) ----------
+                # ---------- DOMAIN-WISE KNN PERMUTATION (within stratum) ----------
                 for grp_name, cols in grouped_variables.items():
                     grp_cols = [c for c in cols if c in X_sub_full.columns]
                     if not grp_cols:
@@ -920,13 +919,13 @@ def main():
                         "loss_pct": loss_pct,
                     })
 
-                # ---------- ABLATION Y DOMAIN-ONLY POR DOMINIO (en estrato) ----------
+                # ---------- DOMAIN-WISE ABLATION AND DOMAIN-ONLY (within stratum) ----------
                 for grp_name, cols in grouped_variables.items():
                     grp_cols = [c for c in cols if c in X_sub_full.columns]
                     if not grp_cols:
                         continue
 
-                    # ABLATION: quitar columnas del dominio
+                    # ABLATION: remove columns from the domain
                     Xtr_abl = Xtr.drop(columns=grp_cols, errors="ignore")
                     Xva_abl = Xva.drop(columns=grp_cols, errors="ignore")
                     abl_model = fit_model(
@@ -956,7 +955,7 @@ def main():
                         m_abl["train_" + k] = v
                     abl_rows.append(m_abl)
 
-                    # DOMAIN-ONLY: sólo columnas del dominio
+                    # DOMAIN-ONLY: domain columns only
                     Xtr_dom = Xtr[grp_cols].copy()
                     Xva_dom = Xva[grp_cols].copy()
                     dom_model = fit_model(
@@ -986,13 +985,13 @@ def main():
                         m_dom["train_" + k] = v
                     dom_rows.append(m_dom)
 
-            # ====== Agregados EN ESE ESTRATO ======
+            # ====== Aggregates WITHIN THAT STRATUM ======
             if not cv_rows:
                 continue
 
             folds_df = pd.DataFrame(cv_rows)
 
-            # --- performance ALL-VARS por estrato ---
+            # --- ALL-VARS performance by stratum ---
             perf = {
                 "group": stratum_name,
                 "mean_r2":   folds_df["r2"].mean()   if ("r2" in folds_df) else np.nan,
@@ -1017,7 +1016,7 @@ def main():
             }
             strat_perf_rows.append(perf)
 
-            # --- FI promedio en el estrato ---
+            # --- Average feature importance in the stratum ---
             if len(fi_fold_list) > 0:
                 fi_avg = np.mean(np.vstack(fi_fold_list), axis=0)
                 for feat, imp in zip(all_predictors, fi_avg):
@@ -1027,7 +1026,7 @@ def main():
                         "importance": imp
                     })
 
-            # --- SHAP promedio y test en el estrato ---
+            # --- Average SHAP and test values in the stratum ---
             if compute_shap and shap_abs_folds:
                 arr = np.mean(np.vstack(shap_abs_folds), axis=0)
                 for feat, val in zip(all_predictors, arr):
@@ -1039,7 +1038,7 @@ def main():
             if compute_shap and shap_chunks_stratum:
                 all_shap_chunks.append(pd.concat(shap_chunks_stratum, ignore_index=True))
 
-            # --- Permutación KNN agregada por dominio en el estrato ---
+            # --- KNN permutation aggregated by domain in the stratum ---
             if perm_knn_rows:
                 perm_knn_df = pd.DataFrame(perm_knn_rows)
                 perm_agg = (
@@ -1056,7 +1055,7 @@ def main():
                 )
                 strat_perm_knn_list.append(perm_agg)
 
-            # --- Ablation agregada por dominio en el estrato ---
+            # --- Ablation aggregated by domain in the stratum ---
             if abl_rows:
                 abl_df = pd.DataFrame(abl_rows)
                 grp = abl_df.groupby(["stratum", "group"], as_index=False)
@@ -1100,7 +1099,7 @@ def main():
                     )
                 strat_abl_agg_list.append(abl_agg)
 
-            # --- Domain-only agregada por dominio en el estrato ---
+            # --- Domain-only aggregated by domain in the stratum ---
             if dom_rows:
                 dom_df = pd.DataFrame(dom_rows)
                 grp = dom_df.groupby(["stratum", "group"], as_index=False)
@@ -1641,7 +1640,7 @@ def main():
                                 "mean_precision": r.get("mean_precision", np.nan),"sd_precision": r.get("sd_precision", np.nan),
                                 "mean_recall": r.get("mean_recall", np.nan),"sd_recall": r.get("sd_recall", np.nan),
                                 "mean_bal_accuracy": r.get("mean_bal_accuracy", np.nan),"sd_bal_accuracy": r.get("sd_bal_accuracy", np.nan),
-                                # train_* los dejamos como NA para estratos
+                                # train_* are left as NA for strata
                                 "train_mean_r2": np.nan, "train_sd_r2": np.nan,
                                 "train_mean_auc": np.nan, "train_sd_auc": np.nan,
                                 "train_mean_rmse": np.nan, "train_sd_rmse": np.nan,
@@ -1659,7 +1658,7 @@ def main():
                             )
                             print(f"[{target}] Stratified performance (incl. ablation/permutation/domain-only/SHAP) appended to {perf_path}")
 
-                        # ===== 2.2 FI + SHAP promedio por estrato =====
+                        # ===== 2.2 Average FI + SHAP by stratum =====
                         if enable_stratified and strat_avg_fi:
                             df_imp = pd.DataFrame(strat_avg_fi)       # source, variable, importance
                             df_imp["clock"] = target
@@ -1677,7 +1676,7 @@ def main():
                             )
                             print(f"[{target}] Stratified avg FI+SHAP appended to {avg_path}")
 
-                        # ===== 2.3 Permutación KNN estratificada =====
+                        # ===== 2.3 Stratified KNN permutation =====
                         if not strat_perm_knn_strat.empty:
                             tmp = strat_perm_knn_strat.copy()
                             tmp["clock"] = target
@@ -1690,7 +1689,7 @@ def main():
                             )
                             print(f"[{target}] Stratified KNN permutation appended to {perm_path_strat}")
 
-                        # ===== 2.4 Ablation estratificada =====
+                        # ===== 2.4 Stratified ablation =====
                         if not strat_abl_agg_strat.empty:
                             tmp = strat_abl_agg_strat.copy()
                             tmp["clock"] = target
@@ -1703,7 +1702,7 @@ def main():
                             )
                             print(f"[{target}] Stratified ablation appended to {abl_path_strat}")
 
-                        # ===== 2.5 Domain-only estratificado =====
+                        # ===== 2.5 Stratified domain-only =====
                         if not strat_dom_agg_strat.empty:
                             tmp = strat_dom_agg_strat.copy()
                             tmp["clock"] = target
@@ -1716,7 +1715,7 @@ def main():
                             )
                             print(f"[{target}] Stratified domain-only performance appended to {dom_path_strat}")
 
-                        # ===== 2.6 SHAP estratificado: wide + long por persona =====
+                        # ===== 2.6 Stratified SHAP: wide + long per participant =====
                         if compute_shap and (not strat_shap_test.empty):
                             tmp = strat_shap_test.copy()
                             ids = id_df.iloc[tmp["row_idx"].values].reset_index(drop=True)

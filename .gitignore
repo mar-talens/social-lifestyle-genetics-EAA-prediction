@@ -20,6 +20,10 @@ tmp/
 temp/
 temporary/
 
+# Ignore generated output by default; retain the directory documentation
+output/*
+!output/README.md
+
 # Operating-system, notebook, and Python cache files
 .DS_Store
 .ipynb_checkpoints/

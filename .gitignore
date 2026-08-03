@@ -39,3 +39,7 @@ venv/
 env/
 .env/
 ENV/
+
+# Non-public manuscript and generated output trees
+paper/
+output/

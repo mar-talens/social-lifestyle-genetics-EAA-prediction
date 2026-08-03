@@ -19,11 +19,6 @@ HRS files.
   scripts.
 - `figures_tables/` — standalone scripts for the main figures, supplementary
   figures, descriptive Table 1, and supplementary feature-importance tables.
-- `paper/` — manuscript and supplementary materials used to document the
-  published workflow.
-- `output/` — generated intermediate datasets, model outputs, figures, and
-  tables. Participant-level and restricted outputs are intended to remain
-  local and ignored by version control.
 - `docs/` — supplementary documentation, including the supplementary-table
   data and provenance notes.
 

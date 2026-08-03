@@ -9,7 +9,7 @@ xgb_grim <- "output/analyses/XGB/Regressor/shap_long_EAA_GRIMAGE.csv"
 xgb_dune <- "output/analyses/XGB/Regressor/shap_long_EAA_DUNEDINMPOA.csv"
 rf_path <- "output/analyses/RF/Regressor/permutation_feature_standard.csv"
 lasso_path <- "output/analyses/LASSO/lasso_coefficients.csv"
-dict_path <- "additional_file_1.xlsx"
+dict_path <- "feature_descriptions.xlsx"
 figure_dir <- "output/figures"
 dir.create(figure_dir, recursive = TRUE, showWarnings = FALSE)
 

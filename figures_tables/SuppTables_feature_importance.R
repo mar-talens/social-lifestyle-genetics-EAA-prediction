@@ -15,7 +15,7 @@ library(readxl)
 library(writexl)
 
 OUTPUT_DIR <- "output/tables"
-METADATA_FILE <- "additional_file_1.xlsx"
+METADATA_FILE <- "feature_descriptions.xlsx"
 
 XGB_REG_DIR <- "output/analyses/XGB/Regressor"
 XGB_CLASS_DIR <- "output/analyses/XGB/Classifier"
